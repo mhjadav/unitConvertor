@@ -1,0 +1,416 @@
+
+
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="https://schema.org/CreativeWork">
+<head>
+<meta charset="UTF-8" />
+
+<script src="unitconverter.js?v=5"></script>
+<script src="unitData.js?v=5"></script>
+
+<style>
+.unitconverter {width: 500px; padding: 20px; margin: 0 auto; border-radius: 5px; font-size: 20px;}
+.ucbackdg {background-color: #BCBCBC;}
+.ucbacklg {background-color: #EFEFEF;}
+.unitconverter select, .unitconverter input {width: 100%; padding: 12px 20px; margin: 8px 0; border: 1px solid #314159; border-radius: 4px; font-size: 20px;}
+.unitconverter input[type="button"] {background-color: #235813; color: #FFFFFF; font-size: 20px;}
+.unitconverter input[type="button"]:hover {opacity: 0.7;}
+	@media (max-width: 600px){
+	.unitconverter {width: 300px;}
+}
+
+</style>
+<link rel="stylesheet" type="text/css" href="./style.css"/>
+<title>Unit Converter | Convert a Wide Variety of Math Units</title>
+<meta name="description" content="Unit converter for converting between common and not so common measurement units." />
+<meta name="keywords" content="unit, converter, Metric, system, English, conversion, measurement, Imperial, U.S." />
+
+<link rel="stylesheet" type="text/css" href="/includes/style4.css?v=1521902033"/>
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="https://plus.google.com/+mathdrills" rel="publisher" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="theme-color" content="#ffffff">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@MathDrills">
+<meta name="twitter:creator" content="@MathDrills">
+<meta name="twitter:title" content="Unit Converter">
+<meta name="twitter:description" content="Unit converter for converting between common and not so common measurement units.">
+<meta name="twitter:image" content="https://www.math-drills.com/images/math-drills-footer.svg">
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-2856036633404156",
+          enable_page_level_ads: true
+     });
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-18060997-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-18060997-1');
+</script>
+
+</head>
+
+<body>
+
+<header>
+	<div class="hlogo">
+		<svg class="iconwhite size100 imdgradbg"><use xlink:href="/includes/symbol-defs4.svg#icon-math-drills-logo"></use></svg>
+	</div>
+	<div class="htitle">
+	<h1 itemprop="name">
+		<span class="maintitle">Unit Converter</span><br /><span class="subtitle">Convert a Wide Variety of Math Units</span>	</h1>
+	</div>
+</header>
+
+<div class="container">
+
+<section class="box1">
+
+<p>Welcome to the unit converter at Math-Drills.com. With this unit converter, you can <span itemprop="description">convert between a wide variety of measurement units including mass, length, volume, temperature, time and many more.</span> To begin, select a category. Next, select the first and second units you would like to convert. Last, enter an amount for either the first unit or the second unit and hit the "Convert to ..." button.</p>
+
+<p class="pstem"></p>
+
+<form name="property_form" class="unitconverter ucbackdg">
+	<label for="the_menu">Select a Category</label><br/>
+	<select name="the_menu" onChange="UpdateUnitMenu(this, document.form_A.unit_menu); UpdateUnitMenu(this, document.form_B.unit_menu)">
+	</select>
+</form>
+
+<form name="form_A" onSubmit="return false" class="unitconverter ucbacklg">
+	<label for="unit_menu">First Unit</label><br/>
+	<select name="unit_menu"></select>
+	<input type="text" name="unit_input" placeholder="Enter an amount" value="1">
+</form>
+
+<form name="form_B" onSubmit="return false" class="unitconverter ucbacklg">
+	<label for="unit_menu">Second Unit</label><br/>
+	<select name="unit_menu"></select>
+    <input type="text" name="unit_input" placeholder="Enter an amount" value="1">
+    <div class="slidecontainer">
+        <h4>Limit decimal to : <label id="lbldecimalslider">14</label></h4>
+        <input type="range" min="1" max="14" value="14" class="slider" id="inputdecimalslider">
+      </div>
+</form>
+
+<h2>How to use the Unit Converter</h2>
+
+<p>First, select the "Category" you would like to use. After you select the category, the options in the "First Unit" and "Second Unit" menus will be populated with the supported units. Select the first and second units you would like to convert. Enter a numerical value in one of the boxes and click the "Convert to ..." button beside the value you entered. The converted value will appear in the other box.</p> 
+
+<p>For example, to convert 75 mph to kph:</p>
+
+<ol> 
+	<li>Select "Velocity &amp; Speed" from the "Select a Category" menu.</li>
+	<li>Select "Mile (US)/hour (mph)" from the "First Unit" menu.</li>
+	<li>Select "Kilometer/hour (kph)" from the "Second Unit" menu.</li>
+	<li>Type 75 in the input box under the "First Unit" menu.</li>
+	<li>Click or tap on the button, "Convert to Second Unit."</li>
+</ol> 
+
+<p>You should get something approximately equal to 120.709 kph in the box under the "Second Unit"(depending on the accuracy of the machine you are using).</p>
+
+
+</section>
+
+<nav class="box2" id="ftopics">
+
+<!-- Math-Drills-Topic-2 -->
+<ins class="adsbygoogle topic2"
+     data-ad-client="ca-pub-2856036633404156"
+     data-ad-slot="3918594659"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<div class="sidelinks">
+	<a href="/easter.php" title="Easter Math Worksheets">
+		<svg class="iconwhite size30 ipink"><use xlink:href="/includes/symbol-defs4.svg#icon-easter"></use></svg>
+		<span class="topic">Easter Math Worksheets</span>
+	</a>
+</div>
+
+<div class="navtitle">Arithmetic</div>
+
+<div class="sidelinks">
+	<a href="/addition.php" title="Addition Worksheets">
+		<svg class="iconwhite size30 igreen"><use xlink:href="/includes/symbol-defs4.svg#icon-plus"></use></svg>
+		<span class="topic">Addition Worksheets</span>
+	</a>
+	<a href="/subtraction.php" title="Subtraction Worksheets">
+		<svg class="iconwhite size30 ired"><use xlink:href="/includes/symbol-defs4.svg#icon-minus"></use></svg>
+		<span class="topic">Subtraction Worksheets</span>
+	</a>
+	<a href="/multiplication.php" title="Multiplication Worksheets -- Multiplication Facts">
+		<svg class="iconwhite size30 ibrown"><use xlink:href="/includes/symbol-defs4.svg#icon-times"></use></svg>
+		<span class="topic">Multiplication Facts Worksheets</span>
+	</a>
+	<a href="/multiplication2.php" title="Multiplication Worksheets -- Long Multiplication">
+		<svg class="iconwhite size30 iteal"><use xlink:href="/includes/symbol-defs4.svg#icon-times"></use></svg>
+		<span class="topic">Long Multiplication Worksheets</span>
+	</a>
+	<a href="/division.php" title="Division Worksheets">
+		<svg class="iconwhite size30 idarkgray"><use xlink:href="/includes/symbol-defs4.svg#icon-divide"></use></svg>
+		<span class="topic">Division Worksheets</span>
+	</a>
+	<a href="/multiop.php" title="Mixed Operations Worksheets">
+		<svg class="iconwhite size30 idarkgray"><use xlink:href="/includes/symbol-defs4.svg#icon-equals"></use></svg>
+		<span class="topic">Mixed Operations Worksheets</span>
+	</a>
+	<a href="/lpmathworksheets.php" title="Large Print Math Worksheets">
+		<svg class="iconwhite size30 iblack"><use xlink:href="/includes/symbol-defs4.svg#icon-zoom-in"></use></svg>
+		<span class="topic">Large Print Math Worksheets</span>
+	</a>
+</div>
+
+<div class="navtitle">Other Math Topics</div>
+
+<div class="sidelinks">
+	<a href="/algebra.php" title="Algebra Worksheets">
+		<svg class="iconwhite size30 idarkgray"><use xlink:href="/includes/symbol-defs4.svg#icon-superscript"></use></svg>
+		<span class="topic">Algebra Worksheets</span>
+	</a>
+	<a href="/baseten.php" title="Base Ten Blocks Worksheets">
+		<svg class="iconwhite size30 idarkgray"><use xlink:href="/includes/symbol-defs4.svg#icon-cube"></use></svg>
+		<span class="topic">Base Ten Blocks Worksheets</span>
+	</a>
+	<a href="/decimal.php" title="Decimals Worksheets">
+		<svg class="iconwhite size30 idarkgray"><use xlink:href="/includes/symbol-defs4.svg#icon-pushpin"></use></svg>
+		<span class="topic">Decimals Worksheets</span>
+	</a>
+	<a href="/factfamilyworksheets.php" title="Fact Family Worksheets">
+		<svg class="iconwhite size30 idarkgray"><use xlink:href="/includes/symbol-defs4.svg#icon-star-empty"></use></svg>
+		<span class="topic">Fact Families Worksheets</span>
+	</a>
+	<a href="/fractions.php" title="Fractions Worksheets">
+		<svg class="iconwhite size30 idarkgray"><use xlink:href="/includes/symbol-defs4.svg#icon-braille"></use></svg>
+		<span class="topic">Fractions Worksheets</span>
+	</a>
+	<a href="/geometry.php" title="Geometry Worksheets">
+		<svg class="iconwhite size30 idarkgray"><use xlink:href="/includes/symbol-defs4.svg#icon-ruler"></use></svg>
+		<span class="topic">Geometry Worksheets</span>
+	</a>
+	<a href="/graphpaper.php" title="Graph Paper">
+		<svg class="iconwhite size30 idarkgray"><use xlink:href="/includes/symbol-defs4.svg#icon-layout"></use></svg>
+		<span class="topic">Graph Paper</span>
+	</a>
+	<a href="/integers.php" title="Integers Worksheets">
+		<svg class="iconwhite size30 idarkgray"><use xlink:href="/includes/symbol-defs4.svg#icon-equalizer"></use></svg>
+		<span class="topic">Integers Worksheets</span>
+	</a>
+	<a href="/measurement.php" title="Measurement Worksheets">
+		<svg class="iconwhite size30 imauve"><use xlink:href="/includes/symbol-defs4.svg#icon-ruler2"></use></svg>
+		<span class="topic">Measurement Worksheets</span>
+	</a>
+	<a href="/money.php" title="Money Worksheets">
+		<svg class="iconwhite size30 idarkgray"><use xlink:href="/includes/symbol-defs4.svg#icon-dollar"></use></svg>
+		<span class="topic">Money Math Worksheets</span>
+	</a>
+	<a href="/numberlineworksheets.php" title="Number Line Worksheets">
+		<svg class="iconwhite size30 idarkgray"><use xlink:href="/includes/symbol-defs4.svg#icon-arrows-h"></use></svg>
+		<span class="topic">Number Lines Worksheets</span>
+	</a>
+	<a href="/numbersense.php" title="Number Sense Worksheets">
+		<svg class="iconwhite size30 idarkgray"><use xlink:href="/includes/symbol-defs4.svg#icon-abacus"></use></svg>
+		<span class="topic">Number Sense Worksheets</span>
+	</a>
+	<a href="/orderofoperations.php" title="Order of Operations Worksheets">
+		<svg class="iconwhite size30 idarkgray"><use xlink:href="/includes/symbol-defs4.svg#icon-calculator"></use></svg>
+		<span class="topic">Order of Operations Worksheets</span>
+	</a>
+	<a href="/patterning.php" title="Patterning Worksheets">
+		<svg class="iconwhite size30 idarkgray"><use xlink:href="/includes/symbol-defs4.svg#icon-sort-amount-asc"></use></svg>
+		<span class="topic">Patterning Worksheets</span>
+	</a>
+	<a href="/percentsworksheets.php" title="Percents Worksheets">
+		<svg class="iconwhite size30 idarkgray"><use xlink:href="/includes/symbol-defs4.svg#icon-percent"></use></svg>
+		<span class="topic">Percents Worksheets</span>
+	</a>
+	<a href="/placevalueworksheets.php" title="Place Value Worksheets">
+		<svg class="iconwhite size30 idarkgray"><use xlink:href="/includes/symbol-defs4.svg#icon-undo"></use></svg>
+		<span class="topic">Place Value Worksheets</span>
+	</a>
+	<a href="/powersoften.php" title="Powers of Ten Worksheets">
+		<svg class="iconwhite size30 idarkgray"><use xlink:href="/includes/symbol-defs4.svg#icon-power"></use></svg>
+		<span class="topic">Powers of Ten Worksheets</span>
+	</a>
+	<a href="/statistics.php" title="Statistics Worksheets">
+		<svg class="iconwhite size30 ipurple"><use xlink:href="/includes/symbol-defs4.svg#icon-bar-chart"></use></svg>
+		<span class="topic">Statistics Worksheets</span>
+	</a>
+	<a href="/timeworksheets.php" title="Time Worksheets">
+		<svg class="iconwhite size30 idarkgray"><use xlink:href="/includes/symbol-defs4.svg#icon-clock"></use></svg>
+		<span class="topic">Time Math Worksheets</span>
+	</a>
+	<a href="/mathwordproblems.php" title="Math Word Problems">
+		<svg class="iconwhite size30 idarkgray"><use xlink:href="/includes/symbol-defs4.svg#icon-file-text"></use></svg>
+		<span class="topic">Math Word Problems Worksheets</span>
+	</a>
+</div>
+
+<div class="navtitle">Holiday Math Worksheets</div>
+
+<div class="sidelinks">
+	<a href="/halloween.php" title="Halloween Math Worksheets">
+		<svg class="iconwhite size30 iblack"><use xlink:href="/includes/symbol-defs4.svg#icon-cat"></use></svg>
+		<span class="topic">Halloween Math Worksheets</span>
+	</a>
+	<a href="/thanksgiving.php" title="Thanksgiving Math Worksheets">
+		<svg class="iconwhite size30 ibrown"><use xlink:href="/includes/symbol-defs4.svg#icon-thanksgiving"></use></svg>
+		<span class="topic">Thanksgiving Math Worksheets</span>
+	</a>
+	<a href="/christmas.php" title="Christmas Math Worksheets">
+		<svg class="iconwhite size30 igreen"><use xlink:href="/includes/symbol-defs4.svg#icon-tree"></use></svg>
+		<span class="topic">Christmas Math Worksheets</span>
+	</a>
+	<a href="/valentines.php" title="Valentine's Day Math Worksheets">
+		<svg class="iconwhite size30 ired"><use xlink:href="/includes/symbol-defs4.svg#icon-heart"></use></svg>
+		<span class="topic">Valentine's Day Math Worksheets</span>
+	</a>
+	<a href="/saintpatricks.php" title="Saint Patrick's Day Math Worksheets">
+		<svg class="iconwhite size30 igreen"><use xlink:href="/includes/symbol-defs4.svg#icon-clover"></use></svg>
+		<span class="topic">Saint Patrick's Day Math Worksheets</span>
+	</a>
+	<a href="/easter.php" title="Easter Math Worksheets">
+		<svg class="iconwhite size30 ipink"><use xlink:href="/includes/symbol-defs4.svg#icon-easter"></use></svg>
+		<span class="topic">Easter Math Worksheets</span>
+		</a>
+	<a href="/special.php" title="Seasonal Math Worksheets">
+		<svg class="iconwhite size30 idarkgray"><use xlink:href="/includes/symbol-defs4.svg#icon-calendar"></use></svg>
+		<span class="topic">Seasonal Math Worksheets</span>
+	</a>
+</div>
+
+<div class="navtitle">Interactive Math</div>
+
+<div class="sidelinks">
+	<a href="/unitconverter.php" title="The Unit Converter">
+		<svg class="iconwhite size30 ipurple"><use xlink:href="/includes/symbol-defs4.svg#icon-loop2"></use></svg>
+		<span class="topic">Unit Converter</span>
+	</a>
+	<a href="/flashcards.php" title="Math Flash Cards">
+		<svg class="iconwhite size30 iorange"><use xlink:href="/includes/symbol-defs4.svg#icon-brightness-up"></use></svg>
+		<span class="topic">Math Flash Cards</span>
+	</a>
+	<a href="/dots.php" title="The Dots Math Game">
+		<svg class="iconwhite size30 ired"><use xlink:href="/includes/symbol-defs4.svg#icon-th-small"></use></svg>
+		<span class="topic">Dots Math Game</span>
+	</a>
+	<a href="/sudoku.php" title="The Sudoku Math Game">
+		<svg class="iconwhite size30 iblue"><use xlink:href="/includes/symbol-defs4.svg#icon-sort-numerically-outline"></use></svg>
+		<span class="topic">Sudoku Math Game</span>
+	</a>
+</div>
+
+<div class="sticky">
+<div class="sidelinks">
+	<a href="#ftopics" title="Topics List">
+		<svg class="iconwhite size30 iblue"><use xlink:href="/includes/symbol-defs4.svg#icon-arrow-up"></use></svg>
+		<span class="topic">Top of Menu</span>
+	</a>
+</div>
+</div>
+	
+</nav>
+
+</div>
+
+<footer>
+
+<div class="pagemenu">
+	<a href="/help.php" title="Help and Frequently Asked Questions">
+		<svg class="iconwhite size32"><use xlink:href="/includes/symbol-defs4.svg#icon-help-with-circle"></use></svg>
+		<span class="topic"> Help and FAQ</span>
+	</a>
+	<a href="/tour.php" title="Tour of Math-Drills">
+		<svg class="iconwhite size32"><use xlink:href="/includes/symbol-defs4.svg#icon-compass2"></use></svg>
+		<span class="topic"> Tour</span>
+	</a>
+	<a href="/social.php" title="Subscribe to our email newsletter or follow us on social media.">
+		<svg class="iconwhite size32"><use xlink:href="/includes/symbol-defs4.svg#icon-newspaper"></use></svg>
+		<span class="topic"> Subscribe and Follow</span>
+	</a>
+	<a href="/terms.php" title="Math-Drills.com terms of use.">
+		<svg class="iconwhite size32"><use xlink:href="/includes/symbol-defs4.svg#icon-edit"></use></svg>
+		<span class="topic"> Terms of Use</span>
+	</a>
+	<a href="/privacy.php" title="Math-Drills.com Privacy and Cookie Policy">
+		<svg class="iconwhite size32"><use xlink:href="/includes/symbol-defs4.svg#icon-locked"></use></svg>
+		<span class="topic"> Privacy and Cookie Policy</span>
+	</a>
+	<a href="/feedback.php" title="Feedback">
+		<svg class="iconwhite size32"><use xlink:href="/includes/symbol-defs4.svg#icon-bubbles4"></use></svg>
+		<span class="topic"> Feedback</span>
+	</a>
+	<a href="/teachers.php" title="Teacher information page.">
+		<svg class="iconwhite size32"><use xlink:href="/includes/symbol-defs4.svg#icon-graduation-cap"></use></svg>
+		<span class="topic"> Teachers</span>
+	</a>
+	<a href="/parents.php" title="Parent information page.">
+		<svg class="iconwhite size32"><use xlink:href="/includes/symbol-defs4.svg#icon-parents"></use></svg>
+		<span class="topic"> Parents</span>
+	</a>
+	<a href="/support.php" title="Support Math-Drills">
+		<svg class="iconwhite size32 imdgradbg"><use xlink:href="/includes/symbol-defs4.svg#icon-math-drills-logo"></use></svg>
+		<span class="topic"> Support Math-Drills</span>
+	</a>
+	<a href="https://www.facebook.com/freemath/" title="Math-Drills.com on Facebook">
+		<svg class="iconwhite size32"><use xlink:href="/includes/symbol-defs4.svg#icon-facebook"></use></svg>
+		<span class="topic"> Facebook</span>
+	</a>
+	<a href="https://twitter.com/MathDrills" title="Math-Drills.com on Twitter">
+		<svg class="iconwhite size32"><use xlink:href="/includes/symbol-defs4.svg#icon-twitter"></use></svg>
+		<span class="topic"> Twitter</span>
+	</a>
+</div>
+
+<p class="pcenter"><img itemprop="image" src="/images/math-drills-footer.svg" alt="Unit converter for converting between common and not so common measurement units." /></p>
+
+<p class="pwhite pcenter" id="pagebottom">
+Copyright &copy; 2005-2018 Math-Drills.com
+<br />
+You may use the math worksheets on this website according to our Terms of Use to help students learn math.
+</p>
+</footer>
+
+<div class="fixed">
+	<a href="/" title="Math Worksheets Home"><svg class="iconwhite size30"><use xlink:href="/includes/symbol-defs4.svg#icon-home"></use></svg></a>
+	<a class="pi" href="#ftopics" title="Topics List"><svg class="iconwhite size30"><use xlink:href="/includes/symbol-defs4.svg#icon-list2"></use></svg></a>
+	<a class="pinterest" href="https://www.pinterest.com/pin/create/button/?url=https%3A%2F%2Fwww.math-drills.com&amp;media=https%3A%2F%2Fwww.math-drills.com%2Fimages%2Fmath-drills-footer.svg&amp;description=Unit%20converter%20for%20converting%20between%20common%20and%20not%20so%20common%20measurement%20units." target="_blank" title="Pin this page to one of your Pinterest boards."><svg class="iconwhite size30"><use xlink:href="/includes/symbol-defs4.svg#icon-pinterest"></use></svg></a>
+	<a class="fibonacci" href="https://www.addtoany.com/share_save" target="_blank" title="Share this page on Twitter, Google+, Facebook and many other social media platforms."><svg class="iconwhite size30"><use xlink:href="/includes/symbol-defs4.svg#icon-share2"></use></svg></a>
+	<div class="searchbox">
+		<form action="/search.php" method="get">
+			<input class="searchtext" type="search" name="s" placeholder="Search for math worksheets..." />
+			<input type="hidden" name="page" value="1">
+			<input type="hidden" name="sort" value="weekly">
+			<button type="submit" value="" class="searchbutton"><svg class="iconwhite size30"><use xlink:href="/includes/symbol-defs4.svg#icon-search"></use></svg></button>
+		</form>
+	</div>
+</div>
+
+<script defer src="/includes/svgxuse.js"></script>
+
+<script>
+var slider = document.getElementById("inputdecimalslider");
+
+slider.oninput = onSliderChange;
+FillMenuWithArray(document.property_form.the_menu, unitData);
+document.property_form.the_menu.onchange();
+</script>
+
+</body>
+
+</html>

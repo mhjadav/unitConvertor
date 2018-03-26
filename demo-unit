@@ -1,0 +1,160 @@
+/*
+Here is the cases
+
+On category change
+Value in first form is source value and value in second form is target value
+
+On Unit change 
+If first form unit change then value in second form is source value and value in first form is target value
+If second form unit change then valuer in first form is source value and value in second form is target value
+
+On value change (User input some value)
+On value enter in first form input value in second form input got change
+On value enter in second form input value in firt form input got change
+
+*/
+(function(){
+    function UpdateUnitMenu(propMenu, unitMenu){
+        FillMenuWithArray(unitMenu, unitData[propMenu.value]);
+        if(document.form_A.unit_input.value){
+            CalculateUnit(document.form_A, document.form_B);
+        }
+    }
+    function onFirstFormValueChange(event){
+        if(event.keyCode === 190 || event.keyCode === 189){
+            return false
+        }
+        if(document.form_A.unit_input.value){
+            CalculateUnit(document.form_A, document.form_B);
+        }
+    }
+    function onFirstFormUnitChange(){
+        if(document.form_A.unit_input.value){
+            CalculateUnit(document.form_B, document.form_A);
+        }
+    }
+    function onSecondFormValueChange(event){
+        if(event.keyCode === 190 || event.keyCode === 189){
+            return false
+        }
+        if(document.form_B.unit_input.value){
+            CalculateUnit(document.form_B, document.form_A);
+        }
+    }
+    function onSecondFormUnitChange(){
+        if(document.form_B.unit_input.value){
+            CalculateUnit(document.form_A, document.form_B);
+        }
+    }
+    window.onload = function(){
+        document.form_A.unit_menu.onchange = onFirstFormUnitChange;
+        document.form_A.unit_input.onkeyup = onFirstFormValueChange;
+        document.form_B.unit_menu.onchange = onSecondFormUnitChange;
+        document.form_B.unit_input.onkeyup = onSecondFormValueChange;
+    }
+    function FillMenuWithArray(myMenu, unitsObject){
+        var unitMenutTextArray = Object.keys(unitsObject); 
+        myMenu.length = unitMenutTextArray.length;
+        unitMenutTextArray.forEach(function(value, index){
+            myMenu.options[index].text = value;
+            if(unitsObject[value].factor){
+                myMenu.options[index].value = unitsObject[value].factor;                
+            }
+        });
+    }
+
+    function CalculateUnit(sourceForm, targetForm){
+        var sourceValue = sourceForm.unit_input.value;
+        sourceValue = parseFloat(sourceValue);
+        if ( !isNaN(sourceValue) || sourceValue == 0){
+            sourceForm.unit_input.value = sourceValue;
+            ConvertFromTo(sourceForm, targetForm);
+        } else {
+            alert("What you gave me cannot be converted or is zero!");
+        }
+    }
+    var TemperatureConvertor = {
+        FahrenheitTo:function(value, targetType){
+            if(targetType === "Celsius"){
+                return (value - 32) / 1.8;
+            }
+            else if(targetType === "Kelvin"){
+                return (value + 459.67) * 5/9;
+            }
+            else if(targetType === "Rankine"){
+                return value + 459.67;
+            } else {
+                return value;
+            } 
+        },
+        CelsiusTo:function(value, targetType){
+            if(targetType === "Fahrenheit"){
+                return value * 1.8 + 32;
+            }
+            else if(targetType === "Kelvin"){
+                return value + 273.15;
+            }
+            else if(targetType === "Rankine"){
+                return (value + 273.15) * 9/5;
+            } else {
+                return value;
+            } 
+        },
+        KelvinTo:function(value, targetType){
+            if(targetType === "Celsius"){
+                return value - 273.15;
+            }
+            else if(targetType === "Fahrenheit"){
+                return  value * 9/5 - 459.67;
+            }
+            else if(targetType === "Rankine"){
+                return  value * 9/5;
+            } else {
+                return value;
+            } 
+        },
+
+        RankineTo:function(value, targetType){
+            if(targetType === "Celsius"){
+                return (value - 491.67) * 5/9;
+            }
+            else if(targetType === "Kelvin"){
+                return  value * 5/9;
+            }
+            else if(targetType === "Fahrenheit"){
+                return value - 459.67;
+            } else {
+                return value;
+            } 
+        }
+    }
+    function ConvertFromTo(sourceForm, targetForm){
+        if(targetForm.unit_menu.selectedIndex > -1 && sourceForm.unit_menu.selectedIndex > -1){
+            var propValue = document.property_form.the_menu.value;
+            var sourceFactor = sourceForm.unit_menu.value;
+            var sourceText = sourceForm.unit_menu.options[sourceForm.unit_menu.selectedIndex].text;
+            var targetFactor = targetForm.unit_menu.value;
+            var targetText = targetForm.unit_menu.options[targetForm.unit_menu.selectedIndex].text;
+            var result = sourceForm.unit_input.value;
+            
+            if (propValue == "Temperature"){
+                sourceType = unitData[propValue][sourceText] ? unitData[propValue][sourceText].name : '';
+                targetType = unitData[propValue][targetText] ? unitData[propValue][targetText].name : '';                
+                result = TemperatureConvertor[sourceType+"To"](result, targetType);
+            } else {
+                result = result * sourceFactor;
+                result = result / targetFactor;
+            }
+            targetForm.unit_input.value = result;
+        }
+    }
+
+    function ClearForm(){
+        document.form_A.unit_input.value = "";
+        document.form_B.unit_input.value = "";
+    }
+    window.ClearForm = ClearForm;
+    window.FillMenuWithArray = FillMenuWithArray;
+    window.UpdateUnitMenu = UpdateUnitMenu;
+    window.CalculateUnit = CalculateUnit;
+})();
