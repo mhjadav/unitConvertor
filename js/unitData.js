@@ -1,9 +1,9 @@
 var unitData = {  
     "Acceleration":{  
-       "Meter/sq.sec (m/sec^2)":{  
+       "Meter/sq.sec (m/sec²)":{  
           'factor':1
        },
-       "Foot/sq.sec (ft/sec^2)":{  
+       "Foot/sq.sec (ft/sec²)":{  
           'factor':0.3048
        },
        "G (g)":{  
@@ -12,12 +12,12 @@ var unitData = {
        "Galileo (gal)":{  
           'factor':0.01
        },
-       "Inch/sq.sec (in/sec^2)":{  
+       "Inch/sq.sec (in/sec²)":{  
           'factor':0.0254
        }
     },
     "Area":{  
-       "Square meter (m^2)":{  
+       "Square meter (m²)":{  
           'factor':1
        },
        "Acre (acre)":{  
@@ -44,16 +44,16 @@ var unitData = {
        "Circular mil":{  
           'factor':5.067075e-10
        },
-       "Square foot (ft^2)":{  
+       "Square foot (ft²)":{  
           'factor':0.09290304
        },
-       "Square inch (in^2)":{  
+       "Square inch (in²)":{  
           'factor':0.00064516
        },
-       "Square mile (mi^2)":{  
+       "Square mile (mi²)":{  
           'factor':2589988
        },
-       "Square yard (yd^2)":{  
+       "Square yard (yd²)":{  
           'factor':0.8361274
        }
     },
@@ -542,16 +542,20 @@ var unitData = {
     },
     "Temperature":{  
        "Degrees Celsius ('C)":{  
-           'name':"Celsius",
+          'factor':1,
+          'increment':0
        },
        "Degrees Fahrenheit ('F)":{  
-          'name':"Fahrenheit"
+          'factor':5/9,
+          'increment':-32
        },
        "Degrees Kelvin ('K)":{  
-           'name': 'Kelvin'
+          'factor':1,
+          'increment':-273.15
        },
        "Degrees Rankine ('R)":{  
-           'name': 'Rankine'
+          'factor':5/9,
+          'increment':-491.67
        }
     },
     "Time":{  

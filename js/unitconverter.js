@@ -19,6 +19,7 @@ On value enter in second form input value in firt form input got change
     var fixedDecimal = 14;
     var lastValueFirstInput = 1;
     var lastValueSecondInput = 1;
+    var lastSeparatorValue = ",";
     function UpdateUnitMenu(propMenu, unitMenu){
         FillMenuWithArray(unitMenu, unitData[propMenu.value]);
         if(document.form_A.unit_input.value){
@@ -26,13 +27,13 @@ On value enter in second form input value in firt form input got change
         }
     }
     function onFirstFormValueChange(event){
-        var value = replaceComma(this.value);
+        var value = replaceSeparator(this.value);
         if ( !isNaN(value) || value == 0){
             this.value = addThousandSeparator(parseFloat(value));
         }
     };
     function onSecondFormValueChange(event){
-        var value = replaceComma(this.value);
+        var value = replaceSeparator(this.value);
         if ( !isNaN(value) || value == 0){
             this.value = addThousandSeparator(parseFloat(value));
         }
@@ -63,6 +64,14 @@ On value enter in second form input value in firt form input got change
             CalculateUnit(document.form_A, document.form_B);
         }
     }
+
+    function onSeparatorChange () {
+        var formAInputValue= addThousandSeparator(replaceSeparator(document.form_A.unit_input.value));
+        var formBInputValue= addThousandSeparator(replaceSeparator(document.form_B.unit_input.value));
+        lastSeparatorValue = document.form_B.separator.value;
+        document.form_A.unit_input.value = formAInputValue;
+        document.form_B.unit_input.value = formBInputValue;
+    }
     window.onload = function(){
         document.form_A.unit_menu.onchange = onFirstFormUnitChange;
         document.form_A.unit_input.onkeyup = onFirstFormValueKeyUp;
@@ -70,6 +79,7 @@ On value enter in second form input value in firt form input got change
         document.form_B.unit_menu.onchange = onSecondFormUnitChange;
         document.form_B.unit_input.onkeyup = onSecondFormValueKeyUp;
         document.form_B.unit_input.onchange = onSecondFormValueChange;
+        document.form_B.separator.onchange = onSeparatorChange;
     }
     function FillMenuWithArray(myMenu, unitsObject){
         var unitMenutTextArray = Object.keys(unitsObject); 
@@ -99,7 +109,7 @@ On value enter in second form input value in firt form input got change
             var sourceText = sourceForm.unit_menu.options[sourceForm.unit_menu.selectedIndex].text;
             var targetFactor = targetForm.unit_menu.value;
             var targetText = targetForm.unit_menu.options[targetForm.unit_menu.selectedIndex].text;
-            var result = replaceComma(sourceForm.unit_input.value);
+            var result = replaceSeparator(sourceForm.unit_input.value);
             
             if (propValue == "Temperature"){
                 result = parseFloat(result) + unitData[propValue][sourceText].increment;
@@ -125,11 +135,19 @@ On value enter in second form input value in firt form input got change
         if(number <= 9999){
             return parseFloat(number.toFixed(fixedDecimal));
         }
-        return parseFloat(number.toFixed(fixedDecimal)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        var isInteger = Number.isInteger(number);
+        var strRegExp = /\B(?=(\d{3})+(?!\d).)/g;
+        if(isInteger) {
+            strRegExp = /\B(?=(\d{3})+(?!\d))/g;
+        }
+        var separator = document.form_B.separator.value;
+        return parseFloat(number.toFixed(fixedDecimal)).toString().replace(strRegExp, separator);
     }
 
-    function replaceComma(numberString) {
-        return parseFloat(numberString.replace(/,/g,""));
+    function replaceSeparator(numberString) {
+        var re = new RegExp(lastSeparatorValue, "g");
+        console.log(parseFloat(numberString.replace(re,"")));
+        return parseFloat(numberString.replace(re,""));
     }
 
     function ClearForm(){
@@ -141,8 +159,8 @@ On value enter in second form input value in firt form input got change
         var output = document.getElementById("lbldecimalslider");
         output.innerHTML = this.value;
         fixedDecimal = this.value;
-        document.form_A.unit_input.value = addThousandSeparator(replaceComma(lastValueFirstInput));
-        document.form_B.unit_input.value = addThousandSeparator(replaceComma(lastValueSecondInput));
+        document.form_A.unit_input.value = addThousandSeparator(replaceSeparator(lastValueFirstInput));
+        document.form_B.unit_input.value = addThousandSeparator(replaceSeparator(lastValueSecondInput));
     }
     window.ClearForm = ClearForm;
     window.FillMenuWithArray = FillMenuWithArray;

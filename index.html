@@ -5,27 +5,33 @@
 <head>
 <meta charset="UTF-8" />
 
-<script src="unitconverter.js?v=5"></script>
-<script src="unitData.js?v=5"></script>
+<script src="./js/unitconverter.js?v=5"></script>
+<script src="./js/unitData.js?v=5"></script>
 
 <style>
-.unitconverter {width: 500px; padding: 20px; margin: 0 auto; border-radius: 5px; font-size: 20px;}
+.unitconverter {width: 100%; max-width: 500px; padding: 20px; margin: 0 auto; border-radius: 5px; font-size: 20px;}
 .ucbackdg {background-color: #BCBCBC;}
 .ucbacklg {background-color: #EFEFEF;}
 .unitconverter select, .unitconverter input {width: 100%; padding: 12px 20px; margin: 8px 0; border: 1px solid #314159; border-radius: 4px; font-size: 20px;}
+.unitconverter input[type="text"] {font-family: monospace;}
 .unitconverter input[type="button"] {background-color: #235813; color: #FFFFFF; font-size: 20px;}
 .unitconverter input[type="button"]:hover {opacity: 0.7;}
-	@media (max-width: 600px){
+@media (max-width: 600px;){
 	.unitconverter {width: 300px;}
 }
-
+.slidecontainer {width: 100%;}
+.slider {margin: 20px 0px 10px 0px !important;-webkit-appearance: none; width: 100%; height: 10px; border-radius: 5px; background: #d3d3d3; outline: none; opacity: 0.7; -webkit-transition: .2s; transition: opacity .2s; padding: 0px !important}
+.slidecontainer h4{margin: 10px 0px 0px 0px;}
+.slider:hover {opacity: 1;}
+.slider::-webkit-slider-thumb {-webkit-appearance: none; appearance: none; width: 23px; height: 24px; border: 0; border-radius: 10px; background: #3f5475; cursor: pointer;}
+.slider::-moz-range-thumb {width: 23px; height: 24px; border: 0; border-radius: 10px; background: #3f5475; cursor: pointer;}
 </style>
-<link rel="stylesheet" type="text/css" href="./style.css"/>
+
 <title>Unit Converter | Convert a Wide Variety of Math Units</title>
 <meta name="description" content="Unit converter for converting between common and not so common measurement units." />
 <meta name="keywords" content="unit, converter, Metric, system, English, conversion, measurement, Imperial, U.S." />
-
-<link rel="stylesheet" type="text/css" href="/includes/style4.css?v=1521902033"/>
+<link rel="alternate" hreflang="en" href="https://www.math-drills.com/unitconverter.php" /><link rel="alternate" hreflang="es" href="https://www.mateslibres.com/convertirunidades.php" /><link rel="alternate" hreflang="fr" href="https://www.mathslibres.com/unite_conversion.php" />
+<link rel="stylesheet" type="text/css" href="./includes/style4.css?v=1522083368"/>
 
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="https://plus.google.com/+mathdrills" rel="publisher" />
@@ -81,9 +87,7 @@
 
 <section class="box1">
 
-<p>Welcome to the unit converter at Math-Drills.com. With this unit converter, you can <span itemprop="description">convert between a wide variety of measurement units including mass, length, volume, temperature, time and many more.</span> To begin, select a category. Next, select the first and second units you would like to convert. Last, enter an amount for either the first unit or the second unit and hit the "Convert to ..." button.</p>
-
-<p class="pstem"></p>
+<p>Welcome to the unit converter at Math-Drills.com. With this unit converter, you can <span itemprop="description">convert between a wide variety of measurement units including mass, length, volume, temperature, time and many more.</span> To begin, select a category. Next, select the first and second units you would like to convert. Last, enter an amount for either the first unit or the second unit.</p>
 
 <form name="property_form" class="unitconverter ucbackdg">
 	<label for="the_menu">Select a Category</label><br/>
@@ -97,19 +101,26 @@
 	<input type="text" name="unit_input" placeholder="Enter an amount" value="1">
 </form>
 
+<p class="pcenter"><svg class="iconwhite size48 iblack"><use xlink:href="/includes/symbol-defs4.svg#icon-arrow-up"></use></svg><svg class="iconwhite size48 ired"><use xlink:href="/includes/symbol-defs4.svg#icon-arrow-down"></use></svg></p>
+
 <form name="form_B" onSubmit="return false" class="unitconverter ucbacklg">
 	<label for="unit_menu">Second Unit</label><br/>
 	<select name="unit_menu"></select>
-    <input type="text" name="unit_input" placeholder="Enter an amount" value="1">
-    <div class="slidecontainer">
-        <h4>Limit decimal to : <label id="lbldecimalslider">14</label></h4>
-        <input type="range" min="1" max="14" value="14" class="slider" id="inputdecimalslider">
-      </div>
+	<input type="text" name="unit_input" placeholder="Enter an amount" value="1">
+	<div class="slidecontainer">
+		<h4>Limit decimal to : <label id="lbldecimalslider">14</label></h4>
+		<input type="range" min="1" max="14" value="14" class="slider" id="inputdecimalslider">
+	</div>
+	<label for="separator">Separator</label><br/>
+	<select name="separator">
+		<option value=",">Comma</option>
+		<option value=" ">Space</option>
+	</select>
 </form>
 
 <h2>How to use the Unit Converter</h2>
 
-<p>First, select the "Category" you would like to use. After you select the category, the options in the "First Unit" and "Second Unit" menus will be populated with the supported units. Select the first and second units you would like to convert. Enter a numerical value in one of the boxes and click the "Convert to ..." button beside the value you entered. The converted value will appear in the other box.</p> 
+<p>Select a "Category". Select a "First Unit" and "Second Unit." Enter a value in either box and the other box will show the converted value.</p> 
 
 <p>For example, to convert 75 mph to kph:</p>
 
@@ -118,7 +129,6 @@
 	<li>Select "Mile (US)/hour (mph)" from the "First Unit" menu.</li>
 	<li>Select "Kilometer/hour (kph)" from the "Second Unit" menu.</li>
 	<li>Type 75 in the input box under the "First Unit" menu.</li>
-	<li>Click or tap on the button, "Convert to Second Unit."</li>
 </ol> 
 
 <p>You should get something approximately equal to 120.709 kph in the box under the "Second Unit"(depending on the accuracy of the machine you are using).</p>
@@ -405,7 +415,6 @@ You may use the math worksheets on this website according to our Terms of Use to
 
 <script>
 var slider = document.getElementById("inputdecimalslider");
-
 slider.oninput = onSliderChange;
 FillMenuWithArray(document.property_form.the_menu, unitData);
 document.property_form.the_menu.onchange();
