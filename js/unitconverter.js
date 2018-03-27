@@ -15,7 +15,7 @@ On value enter in second form input value in firt form input got change
 */
 
 (function(){
-    var  keysAllowedArray = [190, 189];
+    var  keysAllowedArray = [189];
     var fixedDecimal = 14;
     var lastValueFirstInput = 1;
     var lastValueSecondInput = 1;
@@ -71,6 +71,8 @@ On value enter in second form input value in firt form input got change
         lastSeparatorValue = document.form_B.separator.value;
         document.form_A.unit_input.value = formAInputValue;
         document.form_B.unit_input.value = formBInputValue;
+        lastValueFirstInput = document.form_A.unit_input.value;
+        lastValueSecondInput = document.form_B.unit_input.value;
     }
     window.onload = function(){
         document.form_A.unit_menu.onchange = onFirstFormUnitChange;
@@ -123,9 +125,9 @@ On value enter in second form input value in firt form input got change
                     result = parseFloat(result) - unitData[propValue][targetText].increment;
                 }
             }            
+            lastValueFirstInput = result.toString();
+            lastValueSecondInput = document.form_B.unit_input.value;            
             targetForm.unit_input.value = addThousandSeparator(result);
-            lastValueFirstInput = document.form_A.unit_input.value;
-            lastValueSecondInput = document.form_B.unit_input.value;
             console.log(lastValueSecondInput,lastValueFirstInput);
             
         }
@@ -140,7 +142,7 @@ On value enter in second form input value in firt form input got change
         if(isInteger) {
             strRegExp = /\B(?=(\d{3})+(?!\d))/g;
         }
-        var separator = document.form_B.separator.value;
+        var separator = document.form_B.separator.value;        
         return parseFloat(number.toFixed(fixedDecimal)).toString().replace(strRegExp, separator);
     }
 
