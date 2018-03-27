@@ -9,7 +9,7 @@
 <script src="./js/unitData.js?v=5"></script>
 
 <style>
-.unitconverter {width: 100%; max-width: 500px; padding: 20px; margin: 0 auto; border-radius: 5px; font-size: 20px;}
+.unitconverter {width: 100%; max-width: 500px; padding: 20px; margin: 10px;float: left; border-radius: 5px; font-size: 20px;}
 .ucbackdg {background-color: #BCBCBC;}
 .ucbacklg {background-color: #EFEFEF;}
 .unitconverter select, .unitconverter input {width: 100%; padding: 12px 20px; margin: 8px 0; border: 1px solid #314159; border-radius: 4px; font-size: 20px;}
@@ -94,29 +94,34 @@
 	<select name="the_menu" onChange="UpdateUnitMenu(this, document.form_A.unit_menu); UpdateUnitMenu(this, document.form_B.unit_menu)">
 	</select>
 </form>
-
+<form name="form_C" onSubmit="return false" class="unitconverter ucbacklg">
+		<div class="slidecontainer">
+			<h4>Limit decimal to : <label id="lbldecimalslider">14</label></h4>
+			<input type="range" min="1" max="14" value="14" class="slider" id="inputdecimalslider">
+		</div>
+		<label for="separator">Separator</label><br/>
+		<select name="separator">
+			<option value=",">Comma</option>
+			<option value="." hidden>Period</option>				
+			<option value=" ">Space</option>
+			<option value="">No Separator</option>
+		</select>
+	
+		<label for="decimal_separator">Decimal Separator</label><br/>
+		<select name="decimal_separator">
+			<option value=".">Period</option>
+			<option value="," hidden>Comma</option>
+		</select>
+	</form>
 <form name="form_A" onSubmit="return false" class="unitconverter ucbacklg">
 	<label for="unit_menu">First Unit</label><br/>
 	<select name="unit_menu"></select>
 	<input type="text" name="unit_input" placeholder="Enter an amount" value="1">
 </form>
-
-<p class="pcenter"><svg class="iconwhite size48 iblack"><use xlink:href="/includes/symbol-defs4.svg#icon-arrow-up"></use></svg><svg class="iconwhite size48 ired"><use xlink:href="/includes/symbol-defs4.svg#icon-arrow-down"></use></svg></p>
-
 <form name="form_B" onSubmit="return false" class="unitconverter ucbacklg">
 	<label for="unit_menu">Second Unit</label><br/>
 	<select name="unit_menu"></select>
 	<input type="text" name="unit_input" placeholder="Enter an amount" value="1">
-	<div class="slidecontainer">
-		<h4>Limit decimal to : <label id="lbldecimalslider">14</label></h4>
-		<input type="range" min="1" max="14" value="14" class="slider" id="inputdecimalslider">
-	</div>
-	<label for="separator">Separator</label><br/>
-	<select name="separator">
-		<option value=",">Comma</option>
-		<option value=" ">Space</option>
-		<option value="">No Separator</option>
-	</select>
 </form>
 
 <h2>How to use the Unit Converter</h2>

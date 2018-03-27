@@ -20,6 +20,7 @@ On value enter in second form input value in firt form input got change
     var lastValueFirstInput = 1;
     var lastValueSecondInput = 1;
     var lastSeparatorValue = ",";
+    var lastDecimalSeparatorValue = ".";
     function UpdateUnitMenu(propMenu, unitMenu){
         FillMenuWithArray(unitMenu, unitData[propMenu.value]);
         if(document.form_A.unit_input.value){
@@ -66,11 +67,51 @@ On value enter in second form input value in firt form input got change
     }
 
     function onSeparatorChange () {
-        var formAInputValue= addThousandSeparator(replaceSeparator(document.form_A.unit_input.value));
-        var formBInputValue= addThousandSeparator(replaceSeparator(document.form_B.unit_input.value));
-        lastSeparatorValue = document.form_B.separator.value;
-        document.form_A.unit_input.value = formAInputValue;
-        document.form_B.unit_input.value = formBInputValue;
+        if(this.value === ","){
+            document.form_C.decimal_separator.options[1].hidden=true;
+            document.form_C.decimal_separator.options[0].hidden=false;
+            if(this.value === document.form_C.decimal_separator.value){
+                document.form_C.decimal_separator.selectedIndex = 1;
+            } 
+        }else if(this.value === "."){
+            document.form_C.decimal_separator.options[0].hidden=true;
+            document.form_C.decimal_separator.options[1].hidden=false;
+            if(this.value === document.form_C.decimal_separator.value){
+                document.form_C.decimal_separator.selectedIndex = 0;
+            }
+        } else {
+            document.form_C.decimal_separator.options[1].hidden=false;
+            document.form_C.decimal_separator.options[0].hidden=false;
+        }
+        var formAInputValue= replaceSeparator(document.form_A.unit_input.value);
+        var formBInputValue= replaceSeparator(document.form_B.unit_input.value);
+        lastSeparatorValue  = this.value;
+        document.form_A.unit_input.value = addThousandSeparator(formAInputValue);
+        document.form_B.unit_input.value = addThousandSeparator(formBInputValue);
+        lastValueFirstInput = document.form_A.unit_input.value;
+        lastValueSecondInput = document.form_B.unit_input.value;
+    }
+
+    function onDecimalChange () {
+        if(this.value === ","){
+            document.form_C.separator.options[0].hidden=true;
+            document.form_C.separator.options[1].hidden=false;
+            if(this.value === document.form_C.separator.value){
+                document.form_C.separator.selectedIndex = 1;
+            } 
+        }else {
+            document.form_C.separator.options[1].hidden=true;
+            document.form_C.separator.options[0].hidden=false;
+            if(this.value === document.form_C.separator.value){
+                document.form_C.separator.selectedIndex = 0;
+            }
+        }
+        
+        var formAInputValue= replaceSeparator(document.form_A.unit_input.value);
+        var formBInputValue= replaceSeparator(document.form_B.unit_input.value);
+        lastDecimalSeparatorValue  = this.value;
+        document.form_A.unit_input.value = addThousandSeparator(formAInputValue);
+        document.form_B.unit_input.value = addThousandSeparator(formBInputValue);
         lastValueFirstInput = document.form_A.unit_input.value;
         lastValueSecondInput = document.form_B.unit_input.value;
     }
@@ -81,7 +122,8 @@ On value enter in second form input value in firt form input got change
         document.form_B.unit_menu.onchange = onSecondFormUnitChange;
         document.form_B.unit_input.onkeyup = onSecondFormValueKeyUp;
         document.form_B.unit_input.onchange = onSecondFormValueChange;
-        document.form_B.separator.onchange = onSeparatorChange;
+        document.form_C.separator.onchange = onSeparatorChange;
+        document.form_C.decimal_separator.onchange = onDecimalChange
     }
     function FillMenuWithArray(myMenu, unitsObject){
         var unitMenutTextArray = Object.keys(unitsObject); 
@@ -125,31 +167,41 @@ On value enter in second form input value in firt form input got change
                     result = parseFloat(result) - unitData[propValue][targetText].increment;
                 }
             }            
-            lastValueFirstInput = result.toString();
-            lastValueSecondInput = document.form_B.unit_input.value;            
             targetForm.unit_input.value = addThousandSeparator(result);
-            console.log(lastValueSecondInput,lastValueFirstInput);
+            lastValueFirstInput = document.form_A.unit_input.value;            
+            lastValueSecondInput = document.form_B.unit_input.value;                       
+            console.log("ConvertFromTo:",lastValueSecondInput,lastValueFirstInput);
             
         }
     }
 
     function addThousandSeparator(number) {
+        
         if(number <= 9999){
-            return parseFloat(number.toFixed(fixedDecimal));
+            var valueWithDecimalSeparator = parseFloat(number.toFixed(fixedDecimal)).toString().replace(".",lastDecimalSeparatorValue); 
+            return valueWithDecimalSeparator;
         }
         var isInteger = Number.isInteger(number);
         var strRegExp = /\B(?=(\d{3})+(?!\d).)/g;
         if(isInteger) {
             strRegExp = /\B(?=(\d{3})+(?!\d))/g;
         }
-        var separator = document.form_B.separator.value;        
-        return parseFloat(number.toFixed(fixedDecimal)).toString().replace(strRegExp, separator);
+        
+        var fixedDecimalNumber = parseFloat(number.toFixed(fixedDecimal));
+        var valueWithSeparator = fixedDecimalNumber.toString().replace(strRegExp, lastSeparatorValue);  
+        if(!isInteger){
+            return valueWithSeparator.replace(/\.([^\.]*)$/,lastDecimalSeparatorValue+"$1");               
+        }
+        return valueWithSeparator;
     }
 
     function replaceSeparator(numberString) {
-        var re = new RegExp(lastSeparatorValue, "g");
-        console.log(parseFloat(numberString.replace(re,"")));
-        return parseFloat(numberString.replace(re,""));
+        var strRe = lastSeparatorValue?"\\"+lastSeparatorValue:lastSeparatorValue;
+        var re = new RegExp(strRe, "g");
+        numberString = numberString.replace(re,"");
+        numberString.replace(lastDecimalSeparatorValue, ".");
+        console.log("replaceSeparator:",parseFloat(numberString.replace(lastDecimalSeparatorValue, ".")));        
+        return parseFloat(numberString.replace(lastDecimalSeparatorValue, "."));
     }
 
     function ClearForm(){
