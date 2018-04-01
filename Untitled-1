@@ -1,0 +1,56 @@
+Add this css - 
+label.container {
+    display: block;
+    position: relative;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+label.container input {
+    width:20px;
+    cursor: pointer;
+}
+label.container input:checked {
+    background-color: #2196F3;
+}
+label.container input:enabled {
+    background-color: #a9a6a6;
+}
+label.container input:disabled {
+    background-color: #eee;
+}
+=============================================================================
+Replace dropdown code with below code
+
+<label for="separator"><b>Thousands Separator:</b></label> 
+	<label class="container">
+		<input type="radio" checked="checked" name="separator" value=",">
+		Comma
+	</label>
+	<label class="container">
+		<input type="radio" name="separator" value="." disabled>
+		Period
+	</label>
+	<label class="container">
+		<input type="radio" name="separator" value=" ">
+		Space
+	</label>
+	<label class="container">
+		<input type="radio" name="separator" value="">
+		No Separator
+	</label>
+	<br/>
+	<label for="decimal_separator"><b>Decimal Symbol:</b></label> 
+	<label class="container">
+		<input type="radio" checked="checked" name="decimal_separator" value=".">
+		Period
+	</label>
+	<label class="container">
+		<input type="radio" disabled name="decimal_separator" value=",">
+		Comma
+	</label>

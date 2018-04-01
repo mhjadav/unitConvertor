@@ -5,33 +5,71 @@
 <head>
 <meta charset="UTF-8" />
 
-<script src="./js/unitconverter.js?v=5"></script>
-<script src="./js/unitData.js?v=5"></script>
-
+<script src="js/unitconverter.js?v=5"></script>
+<script src="js/unitData.js?v=5"></script>
+<script src="js/lodash.core.min.js"></script>
 <style>
-.unitconverter {width: 100%; max-width: 500px; padding: 20px; margin: 10px;float: left; border-radius: 5px; font-size: 20px;}
+.unitconverter {width: 100%; max-width: 800px; padding: 20px; margin: 0 auto; border-radius: 5px; font-size: 16px;}
 .ucbackdg {background-color: #BCBCBC;}
 .ucbacklg {background-color: #EFEFEF;}
-.unitconverter select, .unitconverter input {width: 100%; padding: 12px 20px; margin: 8px 0; border: 1px solid #314159; border-radius: 4px; font-size: 20px;}
-.unitconverter input[type="text"] {font-family: monospace;}
-.unitconverter input[type="button"] {background-color: #235813; color: #FFFFFF; font-size: 20px;}
+.unitconverter select, .unitconverter input {width: 49%; padding: 5px; margin: 5px 0; border: 1px solid #314159; border-radius: 4px; font-size: 16px;}
+.unitconverter input[type="text"] {font-family: Cambria, 'Times New Roman';}
+.unitconverter input[type="button"] {background-color: #235813; color: #FFFFFF; font-size: 16px;}
 .unitconverter input[type="button"]:hover {opacity: 0.7;}
-@media (max-width: 600px;){
-	.unitconverter {width: 300px;}
+@media (max-width: 600px){
+	.unitconverter select, .unitconverter input {width: 99%; }
 }
-.slidecontainer {width: 100%;}
-.slider {margin: 20px 0px 10px 0px !important;-webkit-appearance: none; width: 100%; height: 10px; border-radius: 5px; background: #d3d3d3; outline: none; opacity: 0.7; -webkit-transition: .2s; transition: opacity .2s; padding: 0px !important}
-.slidecontainer h4{margin: 10px 0px 0px 0px;}
+.slidecontainer {display: inline-block; width: 49%;}
+.slider {-webkit-appearance: none; width: 100%; height: 10px; border-radius: 5px; background: #dddddd; outline: none; opacity: 0.7; -webkit-transition: .2s; transition: opacity .2s; padding: 0px !important, margin: 20px 0px 10px 0px !important; vertical-align: middle;}
 .slider:hover {opacity: 1;}
-.slider::-webkit-slider-thumb {-webkit-appearance: none; appearance: none; width: 23px; height: 24px; border: 0; border-radius: 10px; background: #3f5475; cursor: pointer;}
-.slider::-moz-range-thumb {width: 23px; height: 24px; border: 0; border-radius: 10px; background: #3f5475; cursor: pointer;}
+.slider::-webkit-slider-thumb {-webkit-appearance: none; appearance: none; width: 23px; height: 24px; border: 0; border-radius: 3px; background: #225588; cursor: pointer;}
+.slider::-moz-range-thumb {width: 23px; height: 24px; border: 0; border-radius: 3px; background: #225588; cursor: pointer;}
+
+
+label.container {
+    display: block;
+    position: relative;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    float: left;
+    margin-left: 10px;
+}
+
+label.container input {
+    width:20px;
+    cursor: pointer;
+}
+label.container input:checked {
+    background-color: #2196F3;
+}
+label.container input:enabled {
+    background-color: #a9a6a6;
+}
+label.container input:disabled {
+    background-color: #eee;
+}
+.formcontainer{
+	margin: 10px auto;
+    width: 100%;
+    float: left;
+}
+
+.formcontainer label.title{
+    float: left;
+	padding: 3px 2px;
+}
 </style>
 
 <title>Unit Converter | Convert a Wide Variety of Math Units</title>
 <meta name="description" content="Unit converter for converting between common and not so common measurement units." />
 <meta name="keywords" content="unit, converter, Metric, system, English, conversion, measurement, Imperial, U.S." />
 <link rel="alternate" hreflang="en" href="https://www.math-drills.com/unitconverter.php" /><link rel="alternate" hreflang="es" href="https://www.mateslibres.com/convertirunidades.php" /><link rel="alternate" hreflang="fr" href="https://www.mathslibres.com/unite_conversion.php" />
-<link rel="stylesheet" type="text/css" href="./includes/style4.css?v=1522083368"/>
+<link rel="stylesheet" type="text/css" href="style.css?v=1522083368"/>
 
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="https://plus.google.com/+mathdrills" rel="publisher" />
@@ -51,13 +89,6 @@
 <meta name="twitter:description" content="Unit converter for converting between common and not so common measurement units.">
 <meta name="twitter:image" content="https://www.math-drills.com/images/math-drills-footer.svg">
 
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "ca-pub-2856036633404156",
-          enable_page_level_ads: true
-     });
-</script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-18060997-1"></script>
@@ -90,38 +121,40 @@
 <p>Welcome to the unit converter at Math-Drills.com. With this unit converter, you can <span itemprop="description">convert between a wide variety of measurement units including mass, length, volume, temperature, time and many more.</span> To begin, select a category. Next, select the first and second units you would like to convert. Last, enter an amount for either the first unit or the second unit.</p>
 
 <form name="property_form" class="unitconverter ucbackdg">
-	<label for="the_menu">Select a Category</label><br/>
+	<label for="the_menu">Select a Category</label>
 	<select name="the_menu" onChange="UpdateUnitMenu(this, document.form_A.unit_menu); UpdateUnitMenu(this, document.form_B.unit_menu)">
 	</select>
 </form>
-<form name="form_C" onSubmit="return false" class="unitconverter ucbacklg">
-		<div class="slidecontainer">
-			<h4>Limit decimal to : <label id="lbldecimalslider">14</label></h4>
-			<input type="range" min="1" max="14" value="14" class="slider" id="inputdecimalslider">
-		</div>
-		<label for="separator">Separator</label><br/>
-		<select name="separator">
-			<option value=",">Comma</option>
-			<option value="." hidden>Period</option>				
-			<option value=" ">Space</option>
-			<option value="">No Separator</option>
-		</select>
-	
-		<label for="decimal_separator">Decimal Separator</label><br/>
-		<select name="decimal_separator">
-			<option value=".">Period</option>
-			<option value="," hidden>Comma</option>
-		</select>
-	</form>
+
 <form name="form_A" onSubmit="return false" class="unitconverter ucbacklg">
-	<label for="unit_menu">First Unit</label><br/>
-	<select name="unit_menu"></select>
 	<input type="text" name="unit_input" placeholder="Enter an amount" value="1">
+	<select name="unit_menu"></select>
 </form>
+
+<p class="pcenter"><svg class="iconwhite size32 igreen"><use xlink:href="/includes/symbol-defs4.svg#icon-arrow-up"></use></svg><svg class="iconwhite size32 ired"><use xlink:href="/includes/symbol-defs4.svg#icon-arrow-down"></use></svg></p>
+
 <form name="form_B" onSubmit="return false" class="unitconverter ucbacklg">
-	<label for="unit_menu">Second Unit</label><br/>
-	<select name="unit_menu"></select>
 	<input type="text" name="unit_input" placeholder="Enter an amount" value="1">
+	<select name="unit_menu"></select>
+</form>
+
+<form name="form_C" onsubmit="return false" class="unitconverter">
+		<div class="formcontainer">
+			<div class="formelement">
+				<label for="separator"><b>Thousands Separator/Decimal Separator:</b></label><br>
+				<input type="radio" checked="checked" name="separator" separator="," decimal="."> Comma/Period<br>
+				<input type="radio" name="separator" separator="." decimal=","> Period/Comma<br>
+				<input type="radio" name="separator" separator=" " decimal="."> Space/Period<br>
+				<input type="radio" name="separator" separator=" " decimal=","> Space/Comma<br>
+				<input type="radio" name="separator" separator="" decimal="."> none/period<br>
+				<input type="radio" name="separator" separator="" decimal=","> none/comma<br>
+			</div>
+			<div class="formelement">
+				<label class="title"><b>Decimal places:</b></label>
+				<input type="range" min="1" max="14" value="14" class="slider" id="inputdecimalslider">
+				<label id="lbldecimalslider">14</label>
+			</div>
+		</div>
 </form>
 
 <h2>How to use the Unit Converter</h2>
@@ -144,13 +177,6 @@
 
 <nav class="box2" id="ftopics">
 
-<!-- Math-Drills-Topic-2 -->
-<ins class="adsbygoogle topic2"
-     data-ad-client="ca-pub-2856036633404156"
-     data-ad-slot="3918594659"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <div class="sidelinks">
 	<a href="/easter.php" title="Easter Math Worksheets">

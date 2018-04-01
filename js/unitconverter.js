@@ -67,54 +67,16 @@ On value enter in second form input value in firt form input got change
     }
 
     function onSeparatorChange () {
-        if(this.value === ","){
-            document.form_C.decimal_separator.options[1].hidden=true;
-            document.form_C.decimal_separator.options[0].hidden=false;
-            if(this.value === document.form_C.decimal_separator.value){
-                document.form_C.decimal_separator.selectedIndex = 1;
-            } 
-        }else if(this.value === "."){
-            document.form_C.decimal_separator.options[0].hidden=true;
-            document.form_C.decimal_separator.options[1].hidden=false;
-            if(this.value === document.form_C.decimal_separator.value){
-                document.form_C.decimal_separator.selectedIndex = 0;
-            }
-        } else {
-            document.form_C.decimal_separator.options[1].hidden=false;
-            document.form_C.decimal_separator.options[0].hidden=false;
-        }
         var formAInputValue= replaceSeparator(document.form_A.unit_input.value);
         var formBInputValue= replaceSeparator(document.form_B.unit_input.value);
-        lastSeparatorValue  = this.value;
+        lastSeparatorValue  = this.getAttribute('separator');
+        lastDecimalSeparatorValue = this.getAttribute('decimal');;
         document.form_A.unit_input.value = addThousandSeparator(formAInputValue);
         document.form_B.unit_input.value = addThousandSeparator(formBInputValue);
         lastValueFirstInput = document.form_A.unit_input.value;
         lastValueSecondInput = document.form_B.unit_input.value;
     }
 
-    function onDecimalChange () {
-        if(this.value === ","){
-            document.form_C.separator.options[0].hidden=true;
-            document.form_C.separator.options[1].hidden=false;
-            if(this.value === document.form_C.separator.value){
-                document.form_C.separator.selectedIndex = 1;
-            } 
-        }else {
-            document.form_C.separator.options[1].hidden=true;
-            document.form_C.separator.options[0].hidden=false;
-            if(this.value === document.form_C.separator.value){
-                document.form_C.separator.selectedIndex = 0;
-            }
-        }
-        
-        var formAInputValue= replaceSeparator(document.form_A.unit_input.value);
-        var formBInputValue= replaceSeparator(document.form_B.unit_input.value);
-        lastDecimalSeparatorValue  = this.value;
-        document.form_A.unit_input.value = addThousandSeparator(formAInputValue);
-        document.form_B.unit_input.value = addThousandSeparator(formBInputValue);
-        lastValueFirstInput = document.form_A.unit_input.value;
-        lastValueSecondInput = document.form_B.unit_input.value;
-    }
     window.onload = function(){
         document.form_A.unit_menu.onchange = onFirstFormUnitChange;
         document.form_A.unit_input.onkeyup = onFirstFormValueKeyUp;
@@ -122,13 +84,14 @@ On value enter in second form input value in firt form input got change
         document.form_B.unit_menu.onchange = onSecondFormUnitChange;
         document.form_B.unit_input.onkeyup = onSecondFormValueKeyUp;
         document.form_B.unit_input.onchange = onSecondFormValueChange;
-        document.form_C.separator.onchange = onSeparatorChange;
-        document.form_C.decimal_separator.onchange = onDecimalChange
+        _.forEach(document.form_C.separator, function(element){
+            element.onchange = onSeparatorChange;
+        });
     }
     function FillMenuWithArray(myMenu, unitsObject){
         var unitMenutTextArray = Object.keys(unitsObject); 
         myMenu.length = unitMenutTextArray.length;
-        unitMenutTextArray.forEach(function(value, index){
+        _.forEach(unitMenutTextArray, function(value, index){
             myMenu.options[index].text = value;
             if(unitsObject[value].factor){
                 myMenu.options[index].value = unitsObject[value].factor;                
